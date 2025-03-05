@@ -1,0 +1,124 @@
+- Next.js?
+    
+    기존 react 기술에 라우팅 등 react.js의 확장판, React.js 전용의 웹 개발 Framework
+    
+    react = Library, 
+    
+    Next.js = Framework 
+    
+    FrameWork?  Library?
+    
+    기능 구현의 주도권이 누구에게 있는가? 로 갈림
+    
+    주도권이 개발자에게 있는 경우 :
+    
+    Library ( React, Jquery)…
+    
+    기능구현을 원하는 방향으로 진행하며, 쓰고싶은 도구 및 기술을 사용함
+    
+    1. 자유도가 높음
+    
+    2. 기본 기능 외 제공 x
+    
+    주도권을 Framework가 가짐
+    
+    (Next.js…etc )
+    
+    프레임워크가 제공하는 기능을 이용하거나 , 허용하는 범위 내에서만 추가적인 도구 사용이 가능함
+    
+    예)   Next.js에서 라우팅 기능을 사용할 경우, 
+    
+    Next.js가 제공하는 라우터인 Page/App 라우터를 사용함 
+    
+    1. 자유도가 낮음
+    2. 거의 모든 기능을 제공함
+    
+    (Page Routing, Optimizations… etc)
+    
+- React, Next.js 와 Client Side Rendering
+    
+    **사전 렌더링**
+    
+    → 브라우저의 요청에 서버 측에서 사전에 렌더링이 완료된 HTML을 응답하는 렌더링 방식 
+    
+    Client Side Rendering의 문제점을 해결함!
+    
+    **동작 원리**
+    
+    ![image.png](attachment:037712ea-de40-4402-840d-747fc3ebd8e2:image.png)
+    
+    사용자 / 웹 브라우저 / 서버 
+    
+    1. 사용자 → 서버에게 초기 접속 요청을 보냄
+    2. 웹서버 측에서 JavaScript로 작성해둔 React Component들을 모두 실행해 HTML 파일로 미리 변환함 (렌더링)
+    3. 서버 측에서 렌더링이 완료된 HTML 파일을 브라우저에게 응답해주는 방식
+    
+    **이게 Client Side Rendering이랑 무슨 상관?**
+    
+    →  React의 렌더링에 대해 먼저 분석해봐야 할 필요가 있음
+    
+    ***Client Side Rendering (CSR)***
+    
+    → React.js 앱의 기본적인 렌더링 방식
+    
+    Client(브라우저) 에서 개발자가 작성한 리액트 앱을 실행시켜, 렌더링을 직접 브라우저 차원에서 처리하는 방식
+    
+    **동작 원리**
+    
+    ![image.png](attachment:809e710e-dde0-4b73-b395-8c7f9339a026:image.png)
+    
+    1. 사용자가 브라우저를 통해 초기 접속 요청을 서버에게 보냄
+    2. 리액트 웹 서버는 빈 껍데기 파일인 index.html 를 브라우저(Client)에게 전송함.
+    3. 브라우저는 유저에게 서버로부터 받은 HTML을 빈 화면 렌더링을 함
+    → 빈 껍데기의 Html 파일을 보냈기 때문에
+    4. 서버는 만들어 두었던 리액트 앱을하나의 자바스크립트 파일로 묶어 ( JS Bundle)  브라우저에게 보내주게 됨
+    5. JS 실행 (React 앱 실행)
+    6. 컨텐츠 렌더링 → 유저가 요청한 웹 페이지를 볼 수 있음
+    
+    **그렇다면 왜 React는 CSR을 사용하는가?**
+    
+    → 페이지 이동이 매우 빠르고 쾌적함
+    
+    → 위 CSR 과정에서 있는 JS Bundle에 모든 컴포넌트 코드가 존재하기에, 초기 접속 이후에 페이지를 이동하게 되더라도, 새로 서버에 요청할 필요가 없음. ( Vue와 유사 = SPA)
+    
+    ![image.png](attachment:fb5822e5-f7a4-4a29-b64c-838903469dda:image.png)
+    
+    CSR 단점:
+    
+    SPA의 단점과 같음
+    
+    초기 접속 속도가 느림 = FCP가 느림
+    
+    FCP(First Contentful Paint) 
+    
+    요청 시작 시점으로부터 컨텐츠가 화면에 처음 나타나는데 걸리는 시간 
+    
+    ![image.png](attachment:e6f2f70e-b494-44d8-aa1e-496c8ea0c7d6:image.png)
+    
+- **Next의 사전 렌더링**
+    
+    ![image.png](attachment:16e5ce6b-bac7-4bac-880e-3ab851d77bb3:image.png)
+    
+    다시 사전 렌더링 (중요!)
+    
+    1. 서버 측에서 빈 껍데기가 아닌 미리 렌더링된 HTML을 보여주고, 사용자는 이때부터 바로 완성된 화면을 볼 수 있음
+    
+    → FCP가 짧아짐
+    
+    JS 렌더링
+    
+    →  자바스크립트 코드를 HTML로 변환하는 과정
+    
+    → 이후 렌더링 된 HTML에서는 인터렉션이 불가함 (HTML 파일만 갔기때문에) 
+    
+    → 2. 화면 렌더링
+    
+    브라우저가 서버로부터 받은 HTML 코드를 화면에 그리는 작업
+    
+    1. HTML이 화면에 렌더링 된 이후에 JS Bundle 과정을 거쳐 JavaScript 코드가 실행되며, HTML과 연결되어 동작을 수행할 수 있게 됨 Next에서는 이런 과정을 수화(Hydration)이라고 부름
+    
+    상호작용까지 가능해진 시점을 Time To Interactive , “TTI”라는 지표로 표시
+    
+    이후에 페이지 이동 요청이 발생한다면, CSR 방식으로 컴포넌트가 교체되어 페이지가 교체되는 동작이 일어나게 됨 
+    
+    → Hydraion 과정을 위해 JS Bundle 과정에서  모든 React Component 코드를 불러왔기 때문에, 기존 CSR과 마찬가지로 동작함
