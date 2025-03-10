@@ -122,3 +122,14 @@
     이후에 페이지 이동 요청이 발생한다면, CSR 방식으로 컴포넌트가 교체되어 페이지가 교체되는 동작이 일어나게 됨 
     
     → Hydraion 과정을 위해 JS Bundle 과정에서  모든 React Component 코드를 불러왔기 때문에, 기존 CSR과 마찬가지로 동작함
+
+
+    localhost:12345
+    http://localhost:12345/api // backend & swagger
+
+
+    npm prisma studio ← 서버가 사용중인 데이터를 조회할 수 있는 페이지
+
+[localhost:5555](http://localhost:5555)
+
+1주일 안에 백엔드와 연결해야함 (1/2시간 걸림 ... 조심)
