@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 export default function App({ Component, pageProps }: AppProps) {
 
   const router = useRouter(); //객체 
@@ -12,6 +13,10 @@ export default function App({ Component, pageProps }: AppProps) {
     //back => 이전 페이지
   };
   
+  useEffect( () =>{
+    router.prefetch("/test");
+  }, []); //빈 배열이면 mount 되고 한번만 실행
+
   return (
   <>
   <header>
