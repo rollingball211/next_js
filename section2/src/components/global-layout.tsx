@@ -11,10 +11,11 @@ export default function GlobalLayout({
       <header className={style.header}>
         <Link href={"/"}> ONEBITE BOOKS</Link>
       </header>
-      <main>
+      <main className = {style.main}>
         {children}
       </main>
-      <footer>@제작 jinhyeon</footer>
+      <footer className={style.footer}>
+        @제작 jinhyeon</footer>
     </div>
     );
 }
