@@ -1,5 +1,5 @@
 //css module
-import SearchableLayout from "@/components/searchable.layout";
+import SearchableLayout from "@/components/searchable-layout";
 import style from "./index.module.css";
 import { ReactNode } from "react";
 
