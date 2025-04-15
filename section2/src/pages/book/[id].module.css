@@ -28,7 +28,7 @@
 .cover_img_container > img {
     z-index: 1;
     max-height: 350px;
-    height: 100px;
+    height: 100%;
 }
 
 .title {
