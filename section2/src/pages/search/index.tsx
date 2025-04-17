@@ -4,6 +4,10 @@ import { ReactNode } from "react";
 import books from "@/mock/books.json"
 import BookItem from "@/components/book-item";
 //라우터 사용 가능하게 함
+
+// export const getServerSideProps= async() => {
+
+// };
 export default function Page() {
 
   return (
@@ -11,6 +15,7 @@ export default function Page() {
       {books.map((book) => (
         <BookItem key={book.id} {...book}/>
       ))}
+      
      </div>
   );
 }
