@@ -1,6 +1,7 @@
 import { GetServerSidePropsContext, GetStaticPropsContext, InferGetServerSidePropsType, InferGetStaticPropsType } from "next";
 import style from "./[id].module.css"
 import fetchOneBook from "@/lib/fetch-one-book";
+import { useRouter } from "next/router";
 // const mockData = 
 //     {
 //       "id": 1,
@@ -19,7 +20,7 @@ export const getStaticPaths = () => {
             { params: {id : "2"} },
             { params: {id : "3"} },
         ],
-        fallback :  false,
+        fallback :  true,
     };
 };
 
@@ -30,7 +31,11 @@ export const getStaticProps = async (
         const id = context.params!.id; // !을 이용해 단언함 , 이 페이지는 url 파라미터가 하나 있어야 접근가능한 페이지임
         const book = await fetchOneBook(Number(id));
 
-
+        if(!book){
+            return {
+                notFound : true,
+            };
+        }
 
     return {
         props:{
@@ -42,8 +47,10 @@ export const getStaticProps = async (
 
 export default function Page({book}:InferGetStaticPropsType<typeof getStaticProps>) {
    
-    if(!book) return "문제가 발생했습니다. 다시 시도하세요"
-   
+    const router = useRouter();
+    if(router.isFallback) return "로딩중입니다.";
+    if(!book) return "문제가 발생했습니다 다시 시도하세요.."
+
     const {
         id,
         title,
