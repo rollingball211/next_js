@@ -4,11 +4,11 @@ import style from "./index.module.css";
 import { ReactNode } from "react";
 import books from "@/mock/books.json"
 import BookItem from "@/components/book-item"; //도서 item 렌더링
-import { InferGetServerSidePropsType } from "next";
+import { InferGetServerSidePropsType, InferGetStaticPropsType } from "next";
 import fetchBooks from "@/lib/fetch-books";
 import fetchRandomBooks from "@/lib/fetch-random_books";
 
-export const getServerSideProps = async() => {
+export const getStaticProps = async() => {
   //컴포넌트보다 먼저 실행되어, 컴포넌트에 필요한 데이터를 불러오는 함수
 
   //병렬 코드
@@ -23,12 +23,14 @@ export const getServerSideProps = async() => {
       recoBooks
     },
   };
-};
+}; 
+
+
 
 export default function Home({
   allBooks,
   recoBooks
-} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+} : InferGetStaticPropsType<typeof getStaticProps>) {
   //console.log(allBooks);
   return (
   <div className={style.container}>
