@@ -1,8 +1,8 @@
 import SearchableLayout from "@/components/searchable-layout";
-import { useRouter } from "next/router";
+//import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import BookItem from "@/components/book-item";
-import { GetServerSidePropsContext, GetStaticPropsContext, InferGetServerSidePropsType } from "next";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import fetchBooks from "@/lib/fetch-books";
 //라우터 사용 가능하게 함
 

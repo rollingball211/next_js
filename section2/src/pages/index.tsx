@@ -2,9 +2,9 @@
 import SearchableLayout from "@/components/searchable-layout";
 import style from "./index.module.css";
 import { ReactNode } from "react";
-import books from "@/mock/books.json"
+//import books from "@/mock/books.json"
 import BookItem from "@/components/book-item"; //도서 item 렌더링
-import { InferGetServerSidePropsType, InferGetStaticPropsType } from "next";
+import {InferGetStaticPropsType } from "next";
 import fetchBooks from "@/lib/fetch-books";
 import fetchRandomBooks from "@/lib/fetch-random_books";
 
@@ -21,8 +21,7 @@ export const getStaticProps = async() => {
     props: {
       allBooks,
       recoBooks
-    },
-    revalidate:3,
+    }, 
   };
 }; 
 
