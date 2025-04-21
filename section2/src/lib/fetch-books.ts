@@ -1,7 +1,7 @@
 import { BookData } from "@/types";
 //모든 책의 정보를 불러오는 코드
 export default async function fetchBooks(q?:string) : Promise<BookData[]> {
-    let url = `http://localhost:12345/book`
+    let url = `https://onebite-books-server-main-vert-five.vercel.app/book`
 
     //q가 있다면 검색
     if(q){
