@@ -1,12 +1,13 @@
 import { ReactNode } from "react";
-import SearchBar from "./searchbar";
+import SearchBar from "../components/searchbar";
+
 
 export default function Layout({children} : {
     children : ReactNode
 }){
     return ( 
     <div>
-        <SearchBar/>
+        <SearchBar></SearchBar>
         {children}
     </div>  
     );
