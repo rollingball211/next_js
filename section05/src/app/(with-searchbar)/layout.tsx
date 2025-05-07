@@ -9,7 +9,7 @@ export default function Layout({
   return (
     <div>
       <Suspense fallback = {<div>Loading...</div>}>
-      <Searchbar />
+        <Searchbar />
       </Suspense>
       {children}
     </div>
