@@ -3,6 +3,16 @@ import style from "./page.module.css";
 import books from "@/mock/books.json";
 import { BookData } from "@/types";
 
+
+export const dynamic = ''
+//특정 페이지의 유형을 강제로 Static, Dynamic 페이지로 설정
+/* 
+1. auto  : 기본값, 아무것도 강제하지 않음
+2. force-dynamic: 페이지를 강제로 dynamic 으로 설정함
+3. force-static : 페이지를 강제로 static 으로 설정함
+4. error : 
+*/
+
 //모든 도서의 페이지를 사용하는 부분
 async function AllBooks() {
   const response = await fetch(
