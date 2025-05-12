@@ -15,3 +15,4 @@
 - 2025.04.28: App Router / Layout  
 - 2025.04.29: App Router  
 - 2025.04.30~: 데이터 페칭 (TypeScript + Next.js) 진행 중
+- 2025.05.02
