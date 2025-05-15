@@ -49,8 +49,8 @@ function ReviewEditor() {
   async function createReviewAction (formData : FormData) {
     "use server";
     
-    const content = formData.get("content");
-    const author = formData.get("author");
+    const content = formData.get("content")?.toString();
+    const author = formData.get("author")?.toString();
 
     console.log(content,author);
   }
