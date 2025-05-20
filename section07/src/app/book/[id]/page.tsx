@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
+import ReviewEditor from "@/components/review-editor";
 import style from "./page.module.css";
-import { createReviewAction } from "@/actions/create-review.action";
 import { ReviewData } from "@/types";
 import ReviewItem from "@/components/review-item";
 
@@ -47,21 +47,7 @@ async function BookDetail( {bookId} : {bookId : string}) {
     </section>
   );
 }
-//bookId값을 props로 전달받음
-function ReviewEditor({bookId} : {bookId : string}) {
-  
-  return( 
-  <section>
-    <form action ={createReviewAction}>
-      <input name = "bookId" value ={bookId} hidden readOnly/>
-      <input required name="content" placeholder="리뷰 내용"/>
-      <input required name="author" placeholder="작성자"/>
-      
-      <button type = "submit" >작성하기</button>
-    </form>
-  </section>
-  );
-}
+
 
 async function ReviewList({bookId} : {bookId:string}) {
   const response = await fetch(
