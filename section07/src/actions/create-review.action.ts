@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function createReviewAction (formData : FormData) {
     const content = formData.get("content")?.toString();
@@ -25,7 +25,7 @@ export async function createReviewAction (formData : FormData) {
         }
         );
         console.log(response.status);
-        revalidatePath(`/book/${bookId}`);
+        revalidateTag(`review-${bookId}`);
 
     } catch(err) {
       console.error(err);
