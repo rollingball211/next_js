@@ -2,7 +2,10 @@
 
 import { revalidatePath, revalidateTag } from "next/cache";
 
-export async function createReviewAction (formData : FormData) {
+export async function createReviewAction (
+  _ : any,  //editor에서 쓰는 함수의 state부분을 사용하지 않겠다는 의미
+  formData : FormData
+  ) {
     const content = formData.get("content")?.toString();
     const author = formData.get("author")?.toString();
     const bookId  = formData.get("bookId")?.toString();
@@ -11,11 +14,13 @@ export async function createReviewAction (formData : FormData) {
     console.log(bookId,author,content);
     //api 호출 
     if ( !bookId || !content || !author) {
-      return;
+      return {
+        //undefined를 더이상 로딩하지 않음 -> 연결된 함수에서 undefined를 return하면 안됨
+        status: false,
+        error: "리뷰 내용과 작성자를 입력해주세요",
+      };
     } 
 
-    
-    
     try{
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review`,
@@ -24,11 +29,20 @@ export async function createReviewAction (formData : FormData) {
           body : JSON.stringify({bookId,content,author}), //객체를 직렬화해서 전달
         }
         );
-        console.log(response.status);
-        revalidateTag(`review-${bookId}`);
+        
+        if(!response.ok) {
+          throw new Error(response.statusText);
+        }
 
-    } catch(err) {
-      console.error(err);
-      return;
+        revalidateTag(`review-${bookId}`);
+        return {
+          status: true,
+          error: "",
+        };
+    } catch(err) {     
+      return {
+        status : false,
+        error : `리뷰 저장에 실패했습니다 : ${err}`,
+      }
     }    
   }
