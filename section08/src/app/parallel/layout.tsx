@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ReactNode } from "react"
 
 export default function Layout({
@@ -9,6 +10,9 @@ export default function Layout({
 }) {
     return (
     <div>
+        <div>
+            <Link href={"/parallel"} > parallel</Link>
+        </div>
         {sidebar}
         {children}
     </div>
