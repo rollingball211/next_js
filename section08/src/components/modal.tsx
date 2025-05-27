@@ -18,7 +18,7 @@ export default function Modal( {children} : {children : ReactNode}) {
             });
         }
     }, []);
-    return createPortal(
+    return createPortal( 
     <dialog 
     onClose={() => router.back()}
     onClick={(e) => {
