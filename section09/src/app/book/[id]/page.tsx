@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import ReviewEditor from "@/components/review-editor";
 import style from "./page.module.css";
-import { ReviewData } from "@/types";
+import { BookData, ReviewData } from "@/types";
 import ReviewItem from "@/components/review-item";
 import Image from "next/image";
 
@@ -12,7 +12,8 @@ export function generateStaticParams( ) {
 }
 
 async function BookDetail( {bookId} : {bookId : string}) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${bookId}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${bookId}`,
+        {cache : "force-cache"});
   if (!response.ok) {
     if (response.status === 404) {
       notFound(); // 내부적으로 throw → 아래 코드 실행 X
@@ -68,6 +69,32 @@ async function ReviewList({bookId} : {bookId:string}) {
     ))}
   </section>;
 }
+
+export async function generateMetadata({
+  params,
+}: {params : Promise<{id: string}>;
+})  {
+  //api를 이용해 도서의 정보를 불렁모 
+  const { id } = await params;
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${id}`,
+  {cache : "force-cache"});
+
+  if(!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  const book : BookData = await response.json();
+  return {
+    title : `${book.title} - 한입북스`,
+    description : `${book.description}`,
+    openGrpah: {
+      title : `${book.title} - 한입북스`,
+      description : `${book.description}`,
+      Images : [book.coverImgUrl],
+    },
+  };
+}
+
 
 export default function Page({
   params,
