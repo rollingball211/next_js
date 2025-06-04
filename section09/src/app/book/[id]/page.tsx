@@ -9,7 +9,9 @@ import Image from "next/image";
 
 export function generateStaticParams( ) {
   return [{id:"1"},{id:"2"},{id:"3"}];
-}
+} 
+
+//배포할 경우 vercel을 이용하기 때문에 정적 페이지를 이용하면 문제가 있음
 
 async function BookDetail( {bookId} : {bookId : string}) {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${bookId}`,
