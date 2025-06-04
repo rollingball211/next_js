@@ -7,8 +7,17 @@ import Image from "next/image";
 
 //export const dynamicParams = false;
 
-export function generateStaticParams( ) {
-  return [{id:"1"},{id:"2"},{id:"3"}];
+export async function generateStaticParams( ) {
+  const response = await fetch (`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`);
+  if(!response.ok) {
+    throw new Error(response.statusText);
+  }
+  const books : BookData[] = await response.json();
+  
+  
+  return books.map((book) => ({
+    id: book.id.toString(),
+  }));
 } 
 
 //배포할 경우 vercel을 이용하기 때문에 정적 페이지를 이용하면 문제가 있음

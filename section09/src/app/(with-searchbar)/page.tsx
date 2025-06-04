@@ -1,9 +1,6 @@
 import BookItem from "@/components/book-item";
 import style from "./page.module.css";
 import { BookData } from "@/types";
-import { delay } from "@/util/delay";
-import { Suspense } from "react";
-import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 import { Metadata } from "next";
 
 
@@ -16,7 +13,6 @@ import { Metadata } from "next";
 
 //모든 도서의 페이지를 사용하는 부분
 async function AllBooks() {
-await delay(1500);
 const response = await fetch(
   `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
   { cache : "force-cache"}
@@ -41,7 +37,6 @@ return(
 
 //추천도서 부분
 async function RecoBooks() {
-await delay(3000);
 const response = await fetch(
   `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`,
   {next : {revalidate : 3} }
@@ -59,7 +54,6 @@ return (
 </div>)
 }
 
-export const dynamic = "force-dynamic"
 
 export const metadata : Metadata = {
   title: "한입 북스",
@@ -76,18 +70,11 @@ return (
   <div className={style.container}>
     <section>
       <h3>지금 추천하는 도서</h3>
-     
-      <Suspense 
-        fallback={<BookListSkeleton count={3} />}>
         <RecoBooks/>
-      </Suspense>
     </section>
     <section>
       <h3>등록된 모든 도서</h3>
-      <Suspense 
-        fallback={<BookListSkeleton count={10} />}>
         <AllBooks/>
-      </Suspense>
     </section>
   </div>
 );

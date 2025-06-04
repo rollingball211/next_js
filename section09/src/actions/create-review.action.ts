@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
+import {revalidateTag } from "next/cache";
 
 export async function createReviewAction (
   _ : any,  //editor에서 쓰는 함수의 state부분을 사용하지 않겠다는 의미
