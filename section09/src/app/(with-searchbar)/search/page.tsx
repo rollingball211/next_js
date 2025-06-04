@@ -25,13 +25,13 @@ async function SearchResult( {q} : {q:string }) {
     </div>
   );
 }
-export  async function generateMetadata({
+export async function generateMetadata({
   searchParams,
 } : {
-  searchParams : Promise<{ q?: string}>;
+  searchParams : { q?: string};
 }) :  Promise<Metadata>  {
   //현재 페이지의 메타데이터를 동적으로 생성하는 역할을 함, page의 props를 받을 수 있음
-  const { q } = await searchParams;
+  const  q  =  searchParams.q || "";
   return {
     title : `${q} : 한입북스`,
     description : `${q}의 결과입니다.`,
